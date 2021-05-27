@@ -1,13 +1,13 @@
 churnData = read.csv('https://raw.githubusercontent.com/sudhir-voleti/sample-data-sets/master/kaggle_Telco_Customer_Churn_cleaned.csv')
 str(churnData)
 
-churnData <- read.csv("")
+churnData <- read.csv("C://Users//31202//Desktop//titanic.csv")
 
 m0 = min(3000, nrow(data)); m0 # define max num of obs to handle
 
 data = churnData[1:m0,]
 y = data$Churn  # from UI, variable selection
-X = data[,c(3:21)]  # from UI, variable selection
+X = data[,c(2:6)]  # from UI, variable selection
 df0 = data.frame(y,X)  # DF for use in rest of the app
 pred_data = churnData[5001:6000, 3:21]  # from UI, file input
 
@@ -62,3 +62,5 @@ fit <- train(y ~ .,
 pred <- predict(fit, newdata = test)
 
 c <-confusionMatrix(as.factor(pred),as.factor(test$y))
+
+pca_plot(y,X)

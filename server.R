@@ -54,9 +54,14 @@ server <- function(input, output,session) {
   
   output$pca_plot <- renderPlot({
     req(tr_data())
-    y <- tr_data()[,input$sel_y]
-    X <- tr_data()[,input$sel_x]
-    pca_plot(y,X)
+    if (input$task == "clf"){
+      y <- tr_data()[,input$sel_y]
+      X <- tr_data()[,input$sel_x]
+      pca_plot(y,X)
+    }else{
+      return(NULL)
+    }
+   
   })
   
   
