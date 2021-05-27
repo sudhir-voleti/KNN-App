@@ -1,13 +1,13 @@
 churnData = read.csv('https://raw.githubusercontent.com/sudhir-voleti/sample-data-sets/master/kaggle_Telco_Customer_Churn_cleaned.csv')
 str(churnData)
 
-churnData <- read.csv("C://Users//31202//Desktop//titanic.csv")
+churnData <- read.csv("")
 
 m0 = min(3000, nrow(data)); m0 # define max num of obs to handle
 
 data = churnData[1:m0,]
-y = churnData$Survived  # from UI, variable selection
-X = churnData[,-1]  # from UI, variable selection
+y = data$Churn  # from UI, variable selection
+X = data[,c(3:21)]  # from UI, variable selection
 df0 = data.frame(y,X)  # DF for use in rest of the app
 pred_data = churnData[5001:6000, 3:21]  # from UI, file input
 
@@ -17,7 +17,7 @@ tuneGrid_max = 40  # from UI, slider from 1 to 50
 
 kfoldcv = 5  # from UI, dropdown integers 3 to 10
 
-#df0$y <- as.factor(df0$)
+df0$y <- as.factor(df0$y)
 a00 = as.character(paste0('y_', df0$y)) %>% unique(); a00
 a01 = df0$y %>% unique(); a01
 
@@ -39,10 +39,21 @@ ind <- sample(2, nrow(df0), replace = TRUE,
 train <- df0[ind==1,]
 test <- df0[ind==2,]
 
+
+
+default_glm_mod = train(
+  form = y ~ .,
+  data = train,
+  trControl = trainControl(method = "cv", number = 5),
+  method = "glm",
+  family = "binomial"
+)
+
 set.seed(222)
 fit <- train(y ~ .,
              data = train,
-             method = 'knn',
+             method = 'glm',
+             family = 'binomial'
              trControl = trControl,
              preProc = c("center", "scale"),
              metric = 'ROC',

@@ -1,0 +1,8 @@
+## visualize data using PCA 
+
+
+# test-drive pca_plot
+pca_plot(df0) # 0.34s
+
+# above applies only in classifn
+if (classifn == TRUE) {pca_plot(df0)}

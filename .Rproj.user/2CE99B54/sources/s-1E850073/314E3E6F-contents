@@ -43,11 +43,13 @@ shinyUI(fluidPage(
       tabPanel("Overview & Example Dataset", value=1, 
                includeMarkdown("overview.md")
       ),
-      tabPanel("Data Summary", value=2,
+      tabPanel("Data Summary", value=3,
                DT::dataTableOutput("samp"),
                hr(),
                h4("Data Structure"),
-               verbatimTextOutput("data_str")
+               verbatimTextOutput("data_str"),
+               h4("PCA Plot"),
+               plotOutput("pca_plot")
       ),
       tabPanel("kNN Results", value=3,
                h4("Training Summary"),

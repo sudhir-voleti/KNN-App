@@ -55,5 +55,19 @@ knn_func <- function(df0, pred_data = NULL, classifn,
   return(list(fit,test))
   
 }
+
+pca_plot <- function(y,X){
   
+  y = y; X = X
+  
+  if (is.numeric(y)){y = as.character(paste0('y_', y))}
+  a0 = apply(X, 2, function(x) {is.numeric(x)}) %>% which(.) %>% as.numeric(); a0
+  a1 = princomp(X[,a0], cor=TRUE)$scores[,1:2]
+  a2 = data.frame(y=y, x1=a1[,1], x2=a1[,2])
+  
+  p <- ggplot(data=a2, aes(x=x1, y=x2, colour = factor(y))) + 
+    geom_point(size = 4, shape = 19, alpha = 0.6) + 
+    xlab("PCA compt1") + ylab("PCA compt 2")
+  
+  plot(p)  } # func ends
 

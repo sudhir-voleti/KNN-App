@@ -52,6 +52,13 @@ server <- function(input, output,session) {
     selectInput(inputId = "sel_x",label="Select X (Features)",choices = x_col(),multiple = TRUE,selected = x_col())
   })
   
+  output$pca_plot <- renderPlot({
+    req(tr_data())
+    y <- tr_data()[,input$sel_y]
+    X <- tr_data()[,input$sel_x]
+    pca_plot(y,X)
+  })
+  
   
   knn_fit <- eventReactive(input$apply, {
     
