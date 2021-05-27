@@ -126,6 +126,7 @@ server <- function(input, output,session) {
   # 
   # #----KNN Plot output tab ------#
   output$knn_plot <- renderPlot({
+    req(knn_fit())
     plot(knn_fit()[[1]])
   })
   # 
@@ -172,6 +173,7 @@ server <- function(input, output,session) {
   })
 
   output$download_pred <- downloadHandler(
+    
     filename = function() { "predictions.csv" },
     content = function(file) {
       write.csv(out_pred_df(), file,row.names=FALSE)
