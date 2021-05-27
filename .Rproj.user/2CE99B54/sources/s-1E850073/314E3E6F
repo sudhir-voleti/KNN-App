@@ -1,0 +1,27 @@
+{
+    "id": "314E3E6F",
+    "path": "D:/R Projects/KNN/ui.R",
+    "project_path": "ui.R",
+    "type": "r_source",
+    "hash": "2849712675",
+    "contents": "",
+    "dirty": false,
+    "created": 1622023326323.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "27,46",
+        "scrollLine": "15"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1622105147,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1622105147216,
+    "read_only": false,
+    "read_only_alternatives": []
+}

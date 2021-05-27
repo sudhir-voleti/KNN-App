@@ -1,0 +1,14 @@
+if (!require('randomForest')){install.packages('randomForest')}; library(randomForest)
+if (!require('datasets')){install.packages('datasets')}; library(datasets)
+if (!require('caret')){install.packages('caret')}; library(caret)
+if (!require('ROCR')){install.packages('ROCR')}; library(ROCR)
+if (!require('magrittr')){install.packages('magrittr')}; library(magrittr)
+if (!require('shiny')){install.packages('shiny')}; library(shiny)
+if (!require('markdown')){install.packages('markdown')}; library(markdown)
+if (!require('shinyWidgets')){install.packages('shinyWidgets')}; library(shinyWidgets)
+if (!require('DT')){install.packages('DT')}; library(DT)
+if (!require('pROC')){install.packages('pROC')}; library(pROC)
+if (!require('stringr')){install.packages('stringr')}; library(stringr)
+if (!require('ggplot2')){install.packages('ggplot2')}; library(ggplot2)
+
+

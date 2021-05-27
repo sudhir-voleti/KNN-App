@@ -1,0 +1,53 @@
+churnData = read.csv('https://raw.githubusercontent.com/sudhir-voleti/sample-data-sets/master/kaggle_Telco_Customer_Churn_cleaned.csv')
+str(churnData)
+
+churnData <- read.csv("C://Users//31202//Desktop//titanic.csv")
+
+m0 = min(3000, nrow(data)); m0 # define max num of obs to handle
+
+data = churnData[1:m0,]
+y = churnData$Survived  # from UI, variable selection
+X = churnData[,-1]  # from UI, variable selection
+df0 = data.frame(y,X)  # DF for use in rest of the app
+pred_data = churnData[5001:6000, 3:21]  # from UI, file input
+
+train_popn_ui = 0.7 # from UI, slider from 0.1 to 0.9
+
+tuneGrid_max = 40  # from UI, slider from 1 to 50
+
+kfoldcv = 5  # from UI, dropdown integers 3 to 10
+
+#df0$y <- as.factor(df0$)
+a00 = as.character(paste0('y_', df0$y)) %>% unique(); a00
+a01 = df0$y %>% unique(); a01
+
+for (i0 in 1:length(a01)){ df0$y[df0$y == a01[i0]] <- a00[i0] }
+df0$y %>% head()
+
+library(caret)
+
+trControl <- trainControl(method = "repeatedcv",
+                          number = kfoldcv,
+                          repeats = 3,
+                          classProbs = TRUE,
+                          summaryFunction = twoClassSummary) 
+
+# Partition Data
+set.seed(222)
+ind <- sample(2, nrow(df0), replace = TRUE, 
+              prob = c(train_popn_ui, (1-train_popn_ui)))
+train <- df0[ind==1,]
+test <- df0[ind==2,]
+
+set.seed(222)
+fit <- train(y ~ .,
+             data = train,
+             method = 'knn',
+             trControl = trControl,
+             preProc = c("center", "scale"),
+             metric = 'ROC',
+             tuneGrid = expand.grid(k = 1:tuneGrid_max))  
+
+pred <- predict(fit, newdata = test)
+
+c <-confusionMatrix(as.factor(pred),as.factor(test$y))
