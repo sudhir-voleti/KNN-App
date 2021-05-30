@@ -11,4 +11,5 @@ if (!require('pROC')){install.packages('pROC')}; library(pROC)
 if (!require('stringr')){install.packages('stringr')}; library(stringr)
 if (!require('ggplot2')){install.packages('ggplot2')}; library(ggplot2)
 if (!require('Amelia')){install.packages('Amelia')}; library(Amelia)
+if (!require('e1071')){install.packages('e1071')}; library(e1071)
 
