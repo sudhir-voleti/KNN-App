@@ -10,5 +10,5 @@ if (!require('DT')){install.packages('DT')}; library(DT)
 if (!require('pROC')){install.packages('pROC')}; library(pROC)
 if (!require('stringr')){install.packages('stringr')}; library(stringr)
 if (!require('ggplot2')){install.packages('ggplot2')}; library(ggplot2)
-
+if (!require('Amelia')){install.packages('Amelia')}; library(Amelia)
 

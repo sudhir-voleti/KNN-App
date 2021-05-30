@@ -35,6 +35,12 @@ server <- function(input, output,session) {
   })
   
   
+  output$miss_plot <- renderPlot({
+    req(input$tr_data$datapath)
+    Amelia::missmap(tr_data())
+  })
+  
+  #-------------------#
   output$y_ui <- renderUI({
     req(input$tr_data$datapath)
     selectInput(inputId = 'sel_y',label = "Select Y (Target Variable)",choices = tr_cols(),multiple = FALSE)
@@ -71,13 +77,14 @@ server <- function(input, output,session) {
     X <- tr_data()[,input$sel_x]
     df0 <- data.frame(y,X)
     #df0 
+    withProgress(message = 'Training in progress. Please wait ...',
    fit <- knn_func(df0,
              classifn = input$task, 
              pred_data = NULL,
              train_popn_ui = input$tr_per,
              tuneGrid_max = input$sel_k,
              kfoldcv = input$sel_k_fold
-              )
+              ))
    output$mod_sum <- renderPrint({
      req(fit[[1]])
      cat("\nThe best performing model yields optimal k =", 
@@ -115,7 +122,7 @@ server <- function(input, output,session) {
   
   
   
-  output$tr_res <- renderDataTable({
+  output$tr_res <- DT::renderDataTable({
     req(knn_fit())
     knn_fit()[[1]]$results %>% round(2)%>%head(10) # show as HTML table
   })
@@ -179,9 +186,9 @@ server <- function(input, output,session) {
     out_pred_df = data.frame("prediction" = p3, pred_data)
   })# downloadable file. })
 
-  output$test_op <- renderDataTable({
+  output$test_op <- DT::renderDataTable({
     req(out_pred_df())
-    head(out_pred_df(), 10) # display 10 rows of this as HTML tbl
+    head(out_pred_df(), 25) # display 10 rows of this as HTML tbl
   })
 
   output$download_pred <- downloadHandler(

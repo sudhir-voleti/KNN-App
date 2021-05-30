@@ -48,14 +48,16 @@ shinyUI(fluidPage(
                hr(),
                h4("Data Structure"),
                verbatimTextOutput("data_str"),
-               h4("PCA Plot"),
-               plotOutput("pca_plot")
+               h4("Missingness Map"),
+               plotOutput("miss_plot")
+               
       ),
       tabPanel("kNN Results", value=3,
                h4("Training Summary"),
+               helpText("Training may take a while, upto a minute"),
                verbatimTextOutput("mod_sum"),
                hr(),
-               dataTableOutput('tr_res'),
+               DT::dataTableOutput('tr_res'),
                hr(),
               # h4("Confusion Matrix (Train Set)"),
                #plotOutput('conf_train_plot'),
@@ -70,6 +72,8 @@ shinyUI(fluidPage(
                
       ),
       tabPanel("kNN Plots",value=3,
+               h4("PCA Plot"),
+               plotOutput("pca_plot"),
                h4("Model accuracy vs Different K-Values"),
                plotOutput("knn_plot"),
                h4("Performance on validation set"),
